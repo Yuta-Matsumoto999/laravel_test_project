@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -35,6 +37,26 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:user')->except('logout');
+    }
+
+    protected function guard()
+    {
+        return Auth::guard('user');
+    }
+
+    // ログイン画面
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    // ログアウト処理
+    public function logout(Request $request)
+    {
+        $this->guard('user')->logout();
+        $request->session()->invalidate();
+
+        return redirect('/sale');
     }
 }

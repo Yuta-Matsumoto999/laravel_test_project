@@ -13,50 +13,51 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/', function () {
-    return redirect()->route('sale.index');
-});
+// user側
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Auth::routes();
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-Route::get('auth/login/twitter', 'Auth\SocialController@getTwitterAuth');
-Route::get('auth/login/callback/twitter', 'Auth\SocialController@getTwitterAuthCallback');
+    Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+    Route::get('/sale', 'user\SaleController@index')->name('sale.index');
+    Route::get('/sale/contact', 'user\SaleController@showContact')->name('sale.show.contact');
+    Route::get('/sale/cart', 'user\SaleController@showCart')->name('sale.show.cart');
+    Route::get('/sale/cart/product/{id}', 'user\SaleController@showCartProduct')->name('sale.show.cart.product');
+    Route::get('/sale/product/{id}', 'user\SaleController@showProduct')->name('sale.show.product');
+    Route::get('/sale/cart/purchase', 'user\SaleController@showCartPurchase')->name('sale.show.cart.purchase');
+    Route::get('/sale/question', 'user\SaleController@showMycontact')->name('sale.show.myquestion');
+    Route::get('/sale/{id}/question', 'user\SaleController@contact')->name('sale.show.question');
+    Route::post('/sale/product/cart/{id}', 'user\SaleController@storeCart')->name('sale.store.cart');
+    Route::post('/sale/contact', 'user\SaleController@storeContact')->name('sale.store.contact');
+    Route::post('/sale/purchase/cart', 'user\SaleController@storeCartPurchase')->name('sale.store.cart.purchase');
+    Route::put('/sale/cart/{id}', 'user\SaleController@updateCart')->name('sale.update.cart');
+    Route::delete('/sale/cart/destroy/{id}', 'user\SaleController@destroyByCart')->name('sale.destroy.cart');
+    Route::delete('/sale/contact/{id}', 'user\SaleController@destroyContact')->name('sale.destroy.contact');
 
-// user画面
-Route::get('/sale', 'SaleController@index')->name('sale.index');
-Route::get('/sale/contact', 'SaleController@showContact')->name('sale.show.contact');
-Route::get('/sale/cart', 'SaleController@showCart')->name('sale.show.cart');
-Route::get('/sale/cart/product/{id}', 'SaleController@showCartProduct')->name('sale.show.cart.product');
-Route::get('/sale/product/{id}', 'SaleController@showProduct')->name('sale.show.product');
-Route::get('/sale/cart/purchase', 'SaleController@showCartPurchase')->name('sale.show.cart.purchase');
-Route::get('/sale/question', 'SaleController@showMycontact')->name('sale.show.myquestion');
-Route::get('/sale/{id}/question', 'SaleController@contact')->name('sale.show.question');
-
-Route::post('/sale/product/cart/{id}', 'SaleController@storeCart')->name('sale.store.cart');
-Route::post('/sale/contact', 'SaleController@storeContact')->name('sale.store.contact');
-Route::post('/sale/purchase/cart', 'SaleController@storeCartPurchase')->name('sale.store.cart.purchase');
-Route::put('/sale/cart/{id}', 'SaleController@updateCart')->name('sale.update.cart');
-Route::delete('/sale/cart/destroy/{id}', 'SaleController@destroyByCart')->name('sale.destroy.cart');
-Route::delete('/sale/contact/{id}', 'SaleController@destroyContact')->name('sale.destroy.contact');
 
 
 // 管理者画面
-Route::get('/admin', 'adminController@index')->name('admin.index');
-Route::get('/admin/users', 'adminController@showUsers')->name('admin.users');
-Route::get('/admin/user/{id}', 'adminController@editUser')->name('admin.edit.user');
-Route::get('/admin/product', 'adminController@showProducts')->name('admin.products');
-Route::get('/admin/product/{id}', 'adminController@editProduct')->name('admin.edit.product');
-Route::get('/admin/new/product', 'adminController@createProduct')->name('admin.create.product');
-Route::get('/admin/contact', 'adminController@showContacts')->name('admin.contacts');
-Route::get('/admin/contact/{id}', 'adminController@editComment')->name('admin.editComment');
-Route::post('/admin/product/new', 'adminController@storeProduct')->name('admin.store.product');
-Route::post('/admin/comment/{id}', 'adminController@storeComment')->name('admin.store.comment');
-Route::put('/admin/user/{id}', 'adminController@updateUser')->name('admin.update.user');
-Route::post('/admin/{id}/product', 'adminController@updateProduct')->name('admin.update.product');
-Route::delete('/admin/product/{id}', 'adminController@destroyProduct')->name('admin.destroy.product');
-Route::delete('/admin/{id}/contact', 'adminController@destroyContact')->name('admin.destroy.contact');
+Route::prefix('admin')->namespace('admin')->name('admin')->group(function(){
+
+
+    Auth::routes();
+
+    Route::post('logout', 'Auth\LoginController@logout')->name('admin.logout');
+    Route::get('/', 'adminController@index')->name('admin.index');
+    Route::get('/users', 'adminController@showUsers')->name('admin.users');
+    Route::get('/user/{id}', 'adminController@editUser')->name('admin.edit.user');
+    Route::get('/product', 'adminController@showProducts')->name('admin.products');
+    Route::get('/product/{id}', 'adminController@editProduct')->name('admin.edit.product');
+    Route::get('/new/product', 'adminController@createProduct')->name('admin.create.product');
+    Route::get('/contact', 'adminController@showContacts')->name('admin.contacts');
+    Route::get('/contact/{id}', 'adminController@editComment')->name('admin.editComment');
+    Route::post('/product/new', 'adminController@storeProduct')->name('admin.store.product');
+    Route::post('/comment/{id}', 'adminController@storeComment')->name('admin.store.comment');
+    Route::put('/user/{id}', 'adminController@updateUser')->name('admin.update.user');
+    Route::post('/{id}/product', 'adminController@updateProduct')->name('admin.update.product');
+    Route::delete('/product/{id}', 'adminController@destroyProduct')->name('admin.destroy.product');
+    Route::delete('/{id}/contact', 'adminController@destroyContact')->name('admin.destroy.contact');
+});
+
