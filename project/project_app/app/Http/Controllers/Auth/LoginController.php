@@ -48,7 +48,7 @@ class LoginController extends Controller
     // ログイン画面
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('auth.user.login');
     }
 
     // ログアウト処理

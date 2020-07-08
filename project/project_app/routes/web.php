@@ -39,25 +39,25 @@ use Illuminate\Support\Facades\Route;
 
 
 // 管理者画面
-Route::prefix('admin')->namespace('admin')->name('admin')->group(function(){
+Route::prefix('admin')->namespace('admin')->name('admin.')->group(function(){
 
 
     Auth::routes();
 
-    Route::post('logout', 'Auth\LoginController@logout')->name('admin.logout');
-    Route::get('/', 'adminController@index')->name('admin.index');
-    Route::get('/users', 'adminController@showUsers')->name('admin.users');
-    Route::get('/user/{id}', 'adminController@editUser')->name('admin.edit.user');
-    Route::get('/product', 'adminController@showProducts')->name('admin.products');
-    Route::get('/product/{id}', 'adminController@editProduct')->name('admin.edit.product');
-    Route::get('/new/product', 'adminController@createProduct')->name('admin.create.product');
-    Route::get('/contact', 'adminController@showContacts')->name('admin.contacts');
-    Route::get('/contact/{id}', 'adminController@editComment')->name('admin.editComment');
-    Route::post('/product/new', 'adminController@storeProduct')->name('admin.store.product');
-    Route::post('/comment/{id}', 'adminController@storeComment')->name('admin.store.comment');
-    Route::put('/user/{id}', 'adminController@updateUser')->name('admin.update.user');
-    Route::post('/{id}/product', 'adminController@updateProduct')->name('admin.update.product');
-    Route::delete('/product/{id}', 'adminController@destroyProduct')->name('admin.destroy.product');
-    Route::delete('/{id}/contact', 'adminController@destroyContact')->name('admin.destroy.contact');
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+    Route::get('/', 'adminController@index')->name('index');
+    Route::get('/users', 'adminController@showUsers')->name('users');
+    Route::get('/user/{id}', 'adminController@editUser')->name('edit.user');
+    Route::get('/product', 'adminController@showProducts')->name('products');
+    Route::get('/product/{id}', 'adminController@editProduct')->name('edit.product');
+    Route::get('/new/product', 'adminController@createProduct')->name('create.product');
+    Route::get('/contact', 'adminController@showContacts')->name('contacts');
+    Route::get('/contact/{id}', 'adminController@editComment')->name('editComment');
+    Route::post('/product/new', 'adminController@storeProduct')->name('store.product');
+    Route::post('/comment/{id}', 'adminController@storeComment')->name('store.comment');
+    Route::put('/user/{id}', 'adminController@updateUser')->name('update.user');
+    Route::post('/{id}/product', 'adminController@updateProduct')->name('update.product');
+    Route::delete('/product/{id}', 'adminController@destroyProduct')->name('destroy.product');
+    Route::delete('/{id}/contact', 'adminController@destroyContact')->name('destroy.contact');
 });
 

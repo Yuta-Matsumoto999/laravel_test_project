@@ -50,7 +50,7 @@ class RegisterController extends Controller
     // 新規登録画面
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        return view('auth.user.register');
     }
 
     /**
