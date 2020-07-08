@@ -14,8 +14,13 @@ class CreateAdminCommentsTable extends Migration
     public function up()
     {
         Schema::create('admin_comments', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->integer('contact_id')->unsigned();
+            $table->text('content', 1000);
             $table->timestamps();
+            $table->softDeletes();
+
+            // $table->foreign('contact_id')->references('id')->on('contacts');
         });
     }
 
@@ -29,3 +34,4 @@ class CreateAdminCommentsTable extends Migration
         Schema::dropIfExists('admin_comments');
     }
 }
+
