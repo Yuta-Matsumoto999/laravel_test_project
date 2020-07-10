@@ -20,6 +20,8 @@ class CreateCartsTable extends Migration
             $table->integer('quentity');
             $table->integer('price');
             $table->integer('sumPrice');
+            $table->dateTime('buyTime')->nullable();
+            $table->dateTime('shippingTime')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
