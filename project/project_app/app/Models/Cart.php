@@ -17,8 +17,15 @@ class Cart extends Model
         'product_id',
         'quentity',
         'price',
-        'sumPrice'
+        'sumPrice',
+        'buyTime',
+        'shippingTime'
     ];
+
+    protected $dates = [
+        'buyTime'
+    ];
+
 
     public function user()
     {
@@ -33,6 +40,20 @@ class Cart extends Model
     public function checkoutCart()
     {
         $this->where('user_id', Auth::id())->delete();
+    }
+
+    public function adminBuySearches($searches)
+    {
+        return $this->when(isset($searches['buyTime']), function ($query) use ($searches) {
+            $query->where('buyTime', 'LIKE', '%' . $searches['buyTime'] . '%');
+        })->when(isset($searches['shippingTime']), function ($query) use ($searches) {
+            $query->where('shippingTime', 'LIKE','%' . $searches['shippingTime'] . '%');
+        })->when(isset($searches['buy']), function ($query) use ($searches) {
+            $query->where('shippingTime', null);
+        })
+        ->whereNotNull('buyTime')
+        ->orderBy('buyTime', 'desc')
+        ->paginate(10);
     }
 
 }
