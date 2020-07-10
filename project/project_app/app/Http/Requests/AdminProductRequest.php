@@ -24,7 +24,7 @@ class AdminProductRequest extends FormRequest
     public function rules()
     {
         return [
-          'tag_category_id' => 'required|string|digits_between:1,3',
+          'tag_category_id' => 'required',
           'name' => "required|string|max:45",
           'price' => "required|integer",
           'content' => "required|string|max:1000",
@@ -43,7 +43,6 @@ class AdminProductRequest extends FormRequest
         return [
           'required' => '必須の項目です',
           'integer' => '数字以外は入力できません',
-          'digits_between' => '選択してください',
           'string' => '文字列で入力してください',
           'max' => 'max文字以下で入力してください',
           'file' => 'ファイル形式で入力してください',
