@@ -40,16 +40,21 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    public function showUsers()
+    public function showUsers(Request $request)
     {
-        $users = $this->user->orderBy('updated_at', 'desc')->paginate(10);
+        $searches = $request->all();
+        $users = $this->adminUserSearches($searches);
         return view('admin.users', compact('users'));
     }
 
-    public function editUser($userId)
+    public function confirmUser($userId)
     {
         $user = $this->user->find($userId);
-        return view('admin.userEdit', compact('user'));
+        $buys = $this->cart->where('user_id', $userId)
+                           ->whereNotNull('buyTime')
+                           ->orderBy('buyTime', 'desc')
+                           ->paginate(10);
+        return view('admin.userConfirm', compact('user', 'buys'));
     }
 
     public function updateUser(Request $request, $userId)
@@ -69,7 +74,7 @@ class AdminController extends Controller
 
     public function createProduct()
     {
-        return view('admin.productCreate');
+        return view('admin.productCreate', compact('tagCategories'));
     }
 
     public function storeProduct(AdminProductRequest $request)
@@ -132,6 +137,26 @@ class AdminController extends Controller
     {
         $this->contact->find($contactId)->delete();
         return redirect()->route('admin.contacts');
+    }
+
+    public function showBuys(Request $request)
+    {
+        $searches = $request->all();
+        $buys = $this->cart->adminBuySearches($searches);
+        return view('admin.buys', compact('buys'));
+    }
+
+    public function editBuys($cartId)
+    {
+        $buy = $this->cart->find($cartId);
+        return view('admin.buysEdit', compact('buy'));
+    }
+
+    public function storeShipping(Request $request, $cartId)
+    {
+        $input = $request->all();
+        $this->cart->find($cartId)->fill($input)->save();
+        return redirect()->route('admin.buys');
     }
 
 }
