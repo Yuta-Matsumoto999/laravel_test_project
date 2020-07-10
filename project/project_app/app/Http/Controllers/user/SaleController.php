@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactRequest;
 use App\Http\Requests\CartRequest;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\PurchaseRequest;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\TagCategory;
 use App\Models\User;
 use App\Models\Contact;
+use Carbon\Carbon;
 use Auth;
 
 class SaleController extends Controller
@@ -20,6 +23,7 @@ class SaleController extends Controller
     private $tagCategory;
     private $user;
     private $contact;
+    private $buy;
 
     public function __construct(Product $product, Cart $cart, TagCategory $tagCategory, User $user, Contact $contact)
     {
@@ -70,7 +74,7 @@ class SaleController extends Controller
 
     public function showCart()
     {
-        $carts = $this->cart->where('user_id', Auth::id())->get();
+        $carts = $this->cart->where('user_id', Auth::id())->whereNull('buyTime')->get();
         $sumQuentity = $carts->count('quentity');
         $sumPrice = $carts->sum('sumPrice');
         return view('user.cart', compact('carts', 'sumQuentity', 'sumPrice'));
@@ -91,24 +95,26 @@ class SaleController extends Controller
 
     public function showCartPurchase(Request $request)
     {
-        $users = $this->user->find(Auth::id());
-        $carts = $this->cart->where('user_id', Auth::id())->get();
+        $user = $this->user->find(Auth::id());
+        $carts = $this->cart->where('user_id', Auth::id())->whereNull('buyTime')->get();
         $sumPrice = $carts->sum('sumPrice');
         $taxPrice = $sumPrice * 0.1;
         $totalPrice = $sumPrice + $taxPrice;
-        return view('user.purchase', compact('users', 'carts', 'sumPrice' ,'taxPrice', 'totalPrice'));
+        return view('user.purchase', compact('user', 'carts', 'sumPrice' ,'taxPrice', 'totalPrice'));
     }
 
 
-    public function storeCartPurchase(Request $request)
+    public function storeCartPurchase(PurchaseRequest $request)
     {
-        $this->cart->checkoutCart();
+        $input = $request->all();
+        $this->cart->where('user_id', Auth::id())->whereNull('buyTime')->update(['buyTime' => Carbon::now()]);
+        $this->user->find(Auth::id())->fill($input)->save();
         return view('user.completePurchase');
     }
 
     public function destroyByCart($cartId)
     {
-        $this->cart->find($cartId)->delete();
+        $this->cart->where('user_id', Auth::id())->delete();
         return redirect()->route('sale.show.cart');
     }
 
@@ -129,6 +135,28 @@ class SaleController extends Controller
     {
         $this->contact->find($contactId)->delete();
         return redirect()->route('sale.show.myquestion');
+    }
+
+    public function showBuys()
+    {
+        $buys = $this->cart->where('user_id', Auth::id())
+                           ->whereNotNull('buyTime')
+                           ->orderBy('buyTime', 'desc')
+                           ->paginate(10);
+        return view('user.buys', compact('buys'));
+    }
+
+    public function showUser()
+    {
+        $user = $this->user->find(Auth::id());
+        return view('user.editUser', compact('user'));
+    }
+
+    public function updateUser(UserRequest $request)
+    {
+        $input = $request->all();
+        $this->user->find(Auth::id())->fill($input)->save();
+        return redirect()->route('sale.index');
     }
 }
 
