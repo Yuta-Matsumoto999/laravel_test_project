@@ -43,6 +43,8 @@
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mypage</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="{{ route('sale.show.myquestion') }}">問い合わせ一覧</a>
+            <a class="dropdown-item" href="{{ route('sale.show.buys') }}">購入一覧</a>
+            <a class="dropdown-item" href="{{ route('sale.show.user') }}">アカウント</a>
           </div>
         </li>
         <li class="nav-item">
