@@ -30,13 +30,16 @@
 						<a class="nav-link" href="{{ route('admin.index') }}">Top </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('admin.users') }}">顧客管理</a>
+						<a class="nav-link" href="{{ route('admin.users') }}">Client</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('admin.products') }}">商品管理</a>
+						<a class="nav-link" href="{{ route('admin.products') }}">Product</a>
+          </li>
+          <li class="nav-item">
+						<a class="nav-link" href="{{ route('admin.buys') }}">Buys</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('admin.contacts') }}">お問い合わせ管理</a>
+						<a class="nav-link" href="{{ route('admin.contacts') }}">Contact</a>
 					</li>
 				</ul>
 				<!-- 右側メニュー：Logoutのリンク -->
