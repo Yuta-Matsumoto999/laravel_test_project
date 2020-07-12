@@ -16,7 +16,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'birthdauy', 'gender', 'address_num', 'address'
+        'name', 
+        'email',
+        'password',
+        'birthdauy',
+        'gender',
+        'address_num',
+        'address',
+        'avatar',
+        'twitter_id',
+        'twitter_name'
     ];
 
     /**
@@ -39,13 +48,13 @@ class User extends Authenticatable
 
     public function adminUserSearches($searches)
     {
-        return $this->when(isset($searches['content']), function ($query) use ($searches) {
-            $query->where('name', 'LIKE', '%' . $searches['content'] . '%');
+        return $this->when(isset($searches['name']), function ($query) use ($searches) {
+            $query->where('name', 'LIKE', '%' . $searches['name'] . '%');
         })
-        ->when(isset($searches['content']), function ($query) use ($searches) {
-            $query->where('birthday', 'LIKE','%' . $searches['content'] . '%');
-        })->when(isset($searches['content']), function ($query) use ($searches) {
-            $query->where('email', 'LIKE','%' . $searches['content'] . '%');
+        ->when(isset($searches['birthday']), function ($query) use ($searches) {
+            $query->where('birthday', 'LIKE','%' . $searches['birthday'] . '%');
+        })->when(isset($searches['email']), function ($query) use ($searches) {
+            $query->where('email', 'LIKE','%' . $searches['email'] . '%');
         })
         ->orderBy('updated_at', 'desc')
         ->paginate(10);
