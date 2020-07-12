@@ -4,9 +4,9 @@
 
 <div class="py-4">
   <div class="container">
-    <div class="row">
-      <h1>アカウント情報</h1>
-    </div>
+    <h1>アカウント情報</h1>
+  </div>
+  <div class="container">
     <div class="row">
       <div class="col-12">
         {!! Form::open(['route' => ['sale.update.user']]) !!}
@@ -19,9 +19,6 @@
           <div class="form-group">
             <label>メールアドレス</label>
             {!! Form::email(null, $user->email, ['class' => 'form-control', 'readonly']) !!}
-          </div>
-          <div class="form-group">
-            <p>** メールアドレス、パスワードの変更は  <a href="">こちら</a>  からお願い致します **
           </div>
           <div class="form-row">
             <div class="form-group col-6 @if($errors->has('birthday')) has-error @endif">

@@ -10,7 +10,7 @@
         </div>
       </div>
       @foreach ($carts as $cart)
-      <div class="container border">
+      <div class="container border mt-4">
         <div class="row">
           <div class="col-md-7 order-md-2 mt-3">
             <h4>{{ $cart->products->name }}</h4>
@@ -44,7 +44,7 @@
             </table>
           </div>
           <div class="col-md-5 mt-4">
-            <a href="{{ route('sale.show.cart.product', $cart->id) }}"><img src="{{ asset('storage/' . $cart->products->photo) }}" alt="" class="img-fluid"></a> 
+            <a href="{{ route('sale.show.cart.product', $cart->id) }}"><img src="{{ asset('storage/' . $cart->products->photo) }}" alt="画像がありません" class="img-fluid"></a> 
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 mt-4">
         <h3>お客様情報</h3>
       </div>
       <div class="col-12">

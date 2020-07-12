@@ -12,14 +12,22 @@
       </div>
       <h5>CONTENT</h5>
         {!! Form::textarea('content', $contact->content, ['class' => 'form-control', 'readonly']) !!}
-      <h5>Anser</h5>
       {{-- 管理者からの返答が入る --}}
+      @if ($comments !== null)
+      @foreach ($comments as $comment)
+      <h5>Anser</h5>
+      <div class="form-group">
+        {!! Form::textarea('comment', $comment->content, ['class' => 'form-control', 'readonly']) !!}
+      </div>
+      @endforeach
+      @else
       <div class="form-group">
         {!! Form::textarea('comment', null, ['class' => 'form-control', 'readonly']) !!}
       </div>
       <div class="form-group text-center">
         {!! Form::submit('削除', ['class' => 'btn btn-primary']) !!}
       </div>
+      @endif
     </form>
   </div>
 

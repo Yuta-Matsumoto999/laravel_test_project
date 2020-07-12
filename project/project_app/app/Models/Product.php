@@ -52,7 +52,7 @@ class Product extends Model
             $query->where('name', 'like', '%' . $searches['name'] . '%');
         })
         ->orderBy('updated_at', 'desc')
-        ->paginate(10);
+        ->paginate(24);
     }
 
 }

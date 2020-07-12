@@ -2,36 +2,43 @@
 
 @section('content')
 
-<div class="container">
-  <div class="row mt-5 ml-5">
+<div class="py-4">
+  <div class="container mb-4"> 
     <h3>お問い合わせ管理</h3>
   </div>
-  <table class="table mt-5">
-    <thead>
-      <tr class="row">
-        <th class="col-2 text-center">date</th>
-        <th class="col-4 text-center">user</th>
-        <th class="col-2 text-center">title</th>
-        <th class="col-2 text-center">comment</th>
-        <th class="col-1 text-center"></th>
-        <th class="col-1 text-center"></th>
-      </tr>
-      <tbody>
-        @foreach ($contacts as $contact)
-        <tr class="row">
-          {!! Form::open(['route' =>['admin.destroy.contact', $contact->id], 'method' => 'DELETE', 'class' => 'd-inline']) !!}
-          <td class="col-2 text-center">{{ $contact->created_at->format('Y/m/d') }}</td>
-          <td class="col-4 text-center">{{ $contact->user->name }}</td>
-          <td class="col-2 text-center">{{ $contact->title }}</td>
-          <td class="col-2 text-center"></td>
-          <td class="col-1 text-center"> {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}</td>
-          {!! Form::close() !!}
-          <td class="col-1 text-center"><a class="btn btn-info" href="{{ route('admin.editComment', $contact->id) }}">詳細</a></td>
-        </tr>
-        @endforeach
-      </tbody>
-    </thead>
-  </table>
+  @foreach ($contacts as $contact)
+  <div class="container border mb-5">
+    <h3 class="mt-3">{{ $contact->user->name }}   様</h3>
+    <div class="row">
+      <table class="table table-striped">
+        <tbody>
+          <tr>
+            <th class="text-center">DATE</th>
+            <td class="text-center"> {{ $contact->created_at->format('Y/m/d')}}</td>
+          </tr>
+          <tr>
+            <th class="text-center">TITLE</th>
+            <td class="text-center">{{ $contact->title }}</td>
+          </tr>
+          <tr>
+            <th class="text-center">Comment</th>
+            <td class="text-center">{{ $contact->comment->count() }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="form-group col-6 text-right">
+        {!! Form::open(['route' => ['admin.destroy.contact', $contact->id], 'method' => 'DELETE']) !!}
+          {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
+        {!! Form::close() !!}
+      </div>
+      <div class="col-6 text-left">
+        <a href="{{ route('admin.editComment', $contact->id) }}"><button class="btn btn-info">詳細</button></a>
+      </div>
+    </div>
+  </div>
+  @endforeach
   {{ $contacts->links() }}
 </div>
 

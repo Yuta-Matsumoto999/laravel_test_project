@@ -12,11 +12,11 @@
           {!! Form::open(['route' => ['sale.store.contact']]) !!}
             <div class="form-group">
               <label for="name1">お名前</label>
-              {!! Form::text('', $user->name, ['class' => 'form-control', 'id' => 'name1', 'placeholder' => 'お名前', 'readonly' ]) !!}
+              {!! Form::text('', $user->name, ['class' => 'form-control', 'id' => 'name1', 'readonly' ]) !!}
             </div>
             <div class="form-group">
               <label for="メールアドレス">メールアドレス</label>
-              {!! Form::email('', $user->email, ['class' => 'form-control', 'id' => 'emal1', 'placeholder' => 'example@gmail.com', 'readonly']) !!}
+              {!! Form::email('', $user->email, ['class' => 'form-control', 'id' => 'emal1', 'readonly']) !!}
             </div>
             <div class="form-group @if($errors->has('title')) has-error @endif">
               <label for="title1">タイトル</label>

@@ -4,7 +4,7 @@
 <main>
   <!-- メインビジュアル -->
   <div class="py-4">
-    <div class="container">
+    <div class="container container-fluid">
       <!-- カルーセル外枠 -->
       <div id="main_visual" class="carousel slide" data-ride="carousel">
         <!-- インジケーター -->
@@ -45,7 +45,7 @@
 
   <div class="py-4">
     <section id="menu">
-      <div class="container">
+      <div class="container container-fluid">
         <h1 class="mb-3">Products</h1>
         <h5>SELECT YOUR FAVORITE ITEMS!!</h5>
         {!! Form::open(['route' =>['sale.index',], 'method' => 'GET']) !!}
@@ -72,42 +72,30 @@
         <div class="tab-content" id="panel-menus">
           @foreach ($products as $product)
           <div class="tab-pane fade show active border border-top-0" id="{{ $product->tagCategories->id }}" role="tabpanel" aria-labelledby="tab-menu01">
-            <div class="row p-3 mt-5">
-              <div class="col-md-7 order-md-2">
-                <h4>{{ $product->name }}</h4>
-                <table class="table table-striped">
-                  <tbody>
-                    <tr>
-                      <th>カテゴリー</th>
-                      <td>{{ $product->tagcategories->name }}</td>
-                    </tr>
-                    <tr>
-                      <th>モデル</th>
-                      <td>{{ $product->model }}</td>
-                    </tr>
-                    <tr>
-                      <th>掲載日</th>
-                      <td>{{ $product->updated_at->format('Y/m/d') }}</td>
-                    </tr>
-                    <tr>
-                      <th>商品番号</th>
-                      <td>{{ $product->id }}</td>
-                    </tr>
-                    <tr>
-                      <th>PRICE</th>
-                      <td>{{ $product->price }}円 (+税)</td>
-                    </tr>
-                  </tbody>
-                </table>
+          @endforeach
+            <div class="row d-flex justify-content-start ml-2 mr-2">
+              @foreach ($products as $product)
+              <div class="mb-5 mt-3 col-md-4 col-sm-6 pr-2 pl-2 d-flex justify-content-around">
+                <div class="card " style="width:15rem;">
+                  <a href="{{ route('sale.show.product', $product->id) }}" class="card-link"><img class="card-img-top" src="{{ asset('storage/' . $product->photo) }}" alt="画像がありません"></a>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ $product->name }}</h5>
+                    <div class="mt-3 mb-3">
+                      <h6 class="card-subtitle text-muted">{{ $product->price }}  円(税抜)</h6>
+                    </div>
+                    <div class="mt-3 mb-3">
+                      <h6 class="card-subtitle text-muted">{{ $product->tagCategories->name }}</h6>
+                    </div>
+                    <p class="card-text">{{ Str::limit($product->content, 60) }}</p>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-5 mt-3">
-                <a href="{{ route('sale.show.product', $product->id) }}"><img src="{{ asset('storage/' . $product->photo) }}" alt="画像がありません" class="img-fluid"></a></div>
+              @endforeach
             </div>
-            @endforeach
           </div>
         </div>
       </div>
-        {{ $products->appends($searches)->links() }}
+        {{ $products->appends($searches)->links()  }}
     </section>
   </div>
 </main>

@@ -8,22 +8,21 @@
   <div class="container">
     {!! Form::open(['route' => ['admin.buys'], 'method' => 'GET']) !!}
       <div class="form-row">
-        <div class="form-group col-5 @if($errors->has('buyTime')) has-error @endif">
+        <div class="form-group col-6 @if($errors->has('buyTime')) has-error @endif">
           <label>購入日</label>
           {!! Form::date('buyTime', null, ['class' => 'form-control']) !!}
           <span class="help-block">{{ $errors->first('buyTime') }}</span>
         </div>
-        <div class="form-group col-5 @if($errors->has('shippingTime')) has-error @endif">
+        <div class="form-group col-6 @if($errors->has('shippingTime')) has-error @endif">
           <label>発送日</label>
           {!! Form::date('shippingTime', null, ['class' => 'form-control']) !!}
           <span class="help-block">{{ $errors->first('shippingTime') }}</span>
         </div>
-        <div class="form-group col-2">
-          <label>発送状況</label>
-          <div class="form-check">
-            <input name="buy" value="buy" class="form-check-input" type="checkbox">
-            <label class="form-check-label">未発送</label>
-          </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input name="buy" value="buy" class="form-check-input" type="checkbox">
+          <label class="form-check-label">未発送</label>
         </div>
       </div>
       <div class="form-group text-center">
@@ -85,10 +84,10 @@
   @endforeach
   @else 
     <div class="container">
-      <div class="text-center">
-        <h3>購入履歴はありません</h3>
+      <div class="text-center mt-5">
+        <h3>注文履歴はありません</h3>
       </div>
-      <div class="text-center">
+      <div class="text-center mt-3">
         <img src="{{ asset('logo.image/ogp-1.png') }}" alt="" class="img-fluid">
       </div>
     </div>

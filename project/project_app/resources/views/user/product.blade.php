@@ -20,16 +20,35 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-12 text-center mb-3">
+        <div class="col-12 text-center">
           <h3>小計  (税抜) : {{ $product->price }}円</h3>
         </div>
       </div>
-      <div class="row">
-        <div class="col-3 text-left mb-3">
-          <h2>商品名</h2>
-        </div>
-        <div class="col-9 text-left">
-          <h2>{{ $product->name }}</h2>
+      <div class="container">
+        <div class="p-4">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th class="text-center">商品名</th>
+                <td class="text-center">{{ $product->name }}</td>
+              </tr><tr>
+                <th class="text-center">カテゴリー</th>
+                <td class="text-center">{{ $product->tagCategories->name }}</td>
+              </tr>
+              <tr>
+                <th class="text-center">商品番号</th>
+                <td class="text-center">{{ $product->id }}</td>
+              </tr>
+              <tr>
+                <th class="text-center">モデル</th>
+                <td class="text-center">{{ $product->model }}</td>
+              </tr>
+              <tr>
+                <th class="text-center">掲載日</th>
+                <td class="text-center">{{ $product->updated_at->format('Y/m/d') }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div class="container border border-primary rounded mb-3">

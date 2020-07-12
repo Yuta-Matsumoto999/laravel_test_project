@@ -8,13 +8,6 @@
         <div class="col-8">
           <h1>My Cart</h1>
         </div>
-        <div class="col-4">
-          @if ($carts->isNotEmpty())
-          <h5>小計 ({{ $sumQuentity }}個の商品) (税抜) : {{ $sumPrice}}円</h5>
-          @else
-          <h5>小計 (0個の商品) (税込) : 0円</h5>
-          @endif
-        </div>
       </div>
       @if ($carts->isNotEmpty())
       @foreach ($carts as $cart)
@@ -65,6 +58,9 @@
       </div>
       @endforeach
       <div class="col-12 text-center mt-3">
+        <h5>小計 ({{ $sumQuentity }}個の商品) (税抜) : {{ $sumPrice}}円</h5>
+      </div>
+      <div class="col-12 text-center mt-3">
         <a href="{{ route('sale.show.cart.purchase') }}"><button class="btn btn-primary">購入へ進む</button></a>
       </div>
       @else 
@@ -75,6 +71,9 @@
         <div class="text-center mt-5">
           <img src="{{ asset('logo.image/ogp-1.png') }}" alt="" class="img-fluid">
         </div>
+      </div>
+      <div class="col-12 text-center mt-5">
+        <h5>小計 ({{ $sumQuentity }}個の商品) (税抜) : {{ $sumPrice}}円</h5>
       </div>
       @endif
     </div>

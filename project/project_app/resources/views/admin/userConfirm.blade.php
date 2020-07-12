@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-  <div class="py-4">
+  <div class="py-4 vh-100">
     <div class="container">
       <h3>{{ $user->name }}  さんの購入品</h3>
     </div>
@@ -55,11 +55,11 @@
     </div>
     @endforeach
     @else 
-      <div class="container">
-        <div class="text-center">
+      <div class="container　mt-5">
+        <div class="text-center mt-5">
           <h3>購入履歴はありません</h3>
         </div>
-        <div class="text-center">
+        <div class="text-center mt-5">
           <img src="{{ asset('logo.image/ogp-1.png') }}" alt="" class="img-fluid">
         </div>
       </div>

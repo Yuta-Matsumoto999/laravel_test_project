@@ -18,14 +18,29 @@
           <h3>小計  (税抜) : {{ $cart->products->price }}円</h3>
         </div>
       </div>
-      <div class="row">
-        <div class="col-3 text-left mb-3">
-          <h2>商品名</h2>
+      <div class="container">
+        <div class="p-4">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th class="text-center">商品名</th>
+                <td class="text-center">{{ $cart->products->name }}</td>
+              </tr>
+              <tr>
+                <th class="text-center">商品番号</th>
+                <td class="text-center">{{ $cart->products->id }}</td>
+              </tr>
+              <tr>
+                <th class="text-center">モデル</th>
+                <td class="text-center">{{ $cart->products->model }}</td>
+              </tr>
+              <tr>
+                <th class="text-center">掲載日</th>
+                <td class="text-center">{{ $cart->products->updated_at->format('Y/m/d') }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="col-9 text-left">
-          <h2>{{ $cart->products->name }}</h2>
-        </div>
-      </div>
       <div class="container border border-primary rounded mb-3">
         <div class="row">
           <div class="col-12 text-left mb-2">
@@ -42,7 +57,7 @@
         <div class="form-row">
           <div class="form-group col-3  @if($errors->has('quentity')) has-error @endif">
             <label for="quentity1">数量</label>
-            {!! Form::text('quentity', null, ['class' => 'form-control form-control-sm', 'id' => 'jsNum', 'placeholder' => '1'])!!}
+            {!! Form::text('quentity', null, ['class' => 'form-control form-control-sm', 'id' => 'jsNum', 'placeholder' => $cart->quentity])!!}
             <span class="help-block">{{ $errors->first('quentity') }}</span>
             {!! Form::hidden('price', $cart->products->price, ['id' => 'item_price']) !!}
           </div>
