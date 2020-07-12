@@ -13,6 +13,7 @@ use App\Models\Cart;
 use App\Models\TagCategory;
 use App\Models\User;
 use App\Models\Contact;
+use App\Models\AdminComment;
 use Carbon\Carbon;
 use Auth;
 
@@ -23,9 +24,9 @@ class SaleController extends Controller
     private $tagCategory;
     private $user;
     private $contact;
-    private $buy;
+    private $comment;
 
-    public function __construct(Product $product, Cart $cart, TagCategory $tagCategory, User $user, Contact $contact)
+    public function __construct(Product $product, Cart $cart, TagCategory $tagCategory, User $user, Contact $contact, AdminComment $comment)
     {
         $this->middleware('auth:user');
         $this->product = $product;
@@ -33,6 +34,7 @@ class SaleController extends Controller
         $this->tagCategory = $tagCategory;
         $this->user = $user;
         $this->contact = $contact;
+        $this->comment = $comment;
     }
 
     public function index(Request $request)
@@ -127,9 +129,9 @@ class SaleController extends Controller
     public function contact($contactId)
     {
         $contact = $this->contact->find($contactId);
-        return view('user.showContact', compact('contact'));
+        $comments = $this->comment->where('contact_id', $contactId)->get();
+        return view('user.showContact', compact('contact', 'comments'));
     }
-
 
     public function destroyContact($contactId)
     {
@@ -158,5 +160,6 @@ class SaleController extends Controller
         $this->user->find(Auth::id())->fill($input)->save();
         return redirect()->route('sale.index');
     }
+
 }
 

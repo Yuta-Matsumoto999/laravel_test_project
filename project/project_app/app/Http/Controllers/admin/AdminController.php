@@ -43,7 +43,7 @@ class AdminController extends Controller
     public function showUsers(Request $request)
     {
         $searches = $request->all();
-        $users = $this->adminUserSearches($searches);
+        $users = $this->user->adminUserSearches($searches);
         return view('admin.users', compact('users'));
     }
 
@@ -122,7 +122,8 @@ class AdminController extends Controller
     public function editComment($contactId)
     {
         $contact = $this->contact->find($contactId);
-        return view('admin.contactEdit', compact('contact'));
+        $comments = $this->comment->where('contact_id', $contactId)->get();
+        return view('admin.contactEdit', compact('contact', 'comments'));
     }
 
     public function storeComment(AdminCommentRequest $request, $contactId)
