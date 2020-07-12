@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Route;
         return redirect()->route('sale.index');
     });
 
+    Route::get('auth/login/twitter', 'Auth\LoginController@getTwitterAuth');
+    Route::get('auth/login/callback/twitter', 'Auth\LoginController@getTwitterAuthCallback');
+
+
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('/sale', 'user\SaleController@index')->name('sale.index');
     Route::get('/sale/contact', 'user\SaleController@showContact')->name('sale.show.contact');
@@ -51,7 +55,7 @@ Route::prefix('admin')->namespace('admin')->name('admin.')->group(function(){
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('/', 'adminController@index')->name('index');
     Route::get('/users', 'adminController@showUsers')->name('users');
-    Route::get('/user/{id}', 'adminController@confirmUser')->name('.user');
+    Route::get('/user/{id}', 'adminController@confirmUser')->name('confirm.user');
     Route::get('/product', 'adminController@showProducts')->name('products');
     Route::get('/product/{id}', 'adminController@editProduct')->name('edit.product');
     Route::get('/new/product', 'adminController@createProduct')->name('create.product');

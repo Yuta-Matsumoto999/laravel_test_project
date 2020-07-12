@@ -65,6 +65,9 @@
                             </div>
                         </div>
                     </form>
+                    <a class="btn btn-block btn-social btn-twitter"  href="auth/login/twitter">
+                        <i class="fab fa-twitter"></i> Sign in with twitter
+                    </a>
                 </div>
             </div>
         </div>
