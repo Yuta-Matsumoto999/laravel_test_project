@@ -72,3 +72,8 @@ Route::prefix('admin')->namespace('admin')->name('admin.')->group(function(){
     Route::delete('/{id}/contact', 'adminController@destroyContact')->name('destroy.contact');
 });
 
+// ['register' => false,
+//                   'reset' => false,
+//                   'confirm' => false,
+//                   'verify' => false
+//                 ]
