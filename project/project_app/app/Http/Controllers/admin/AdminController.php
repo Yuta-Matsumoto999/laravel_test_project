@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminProductRequest;
 use App\Http\Requests\AdminCommentRequest;
@@ -80,14 +81,17 @@ class AdminController extends Controller
     public function storeProduct(AdminProductRequest $request)
     {
         $input = $request->except('photo');
-        $path = $request->file('photo')->store('images', 'public');
+        $image = $request->file('photo');
+        $name = $image->getClientOriginalName();
+        Image::make($image)->resize(1080, 700)->save(public_path('storage/images/' . $name ) );;
+
         Product::insert([
             'tag_category_id' => $input['tag_category_id'],
             'name' => $input['name'],
             'price' => $input['price'],
             'content' => $input['content'],
             'model' => $input['model'],
-            'photo' => $path,
+            'photo' => $name,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
