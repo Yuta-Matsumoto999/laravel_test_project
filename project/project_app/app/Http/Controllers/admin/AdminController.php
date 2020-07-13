@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminProductRequest;
+use App\Http\Requests\AdminEditProductRequest;
 use App\Http\Requests\AdminCommentRequest;
 use App\Models\Product;
 use App\Models\Cart;
@@ -104,7 +105,7 @@ class AdminController extends Controller
         return view('admin.productEdit', compact('product'));
     }
 
-    public function updateProduct(AdminProductRequest $request, $productId)
+    public function updateProduct(AdminEditProductRequest $request, $productId)
     {
         $input = $request->all();
         $this->product->find($productId)->fill($input)->save();
