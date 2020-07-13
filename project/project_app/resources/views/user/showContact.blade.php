@@ -13,7 +13,7 @@
       <h5>CONTENT</h5>
         {!! Form::textarea('content', $contact->content, ['class' => 'form-control', 'readonly']) !!}
       {{-- 管理者からの返答が入る --}}
-      @if ($comments !== null)
+      @if ($comments->isNotEmpty())
       @foreach ($comments as $comment)
       <h5>Anser</h5>
       <div class="form-group">
@@ -21,10 +21,7 @@
       </div>
       @endforeach
       @else
-      <div class="form-group">
-        {!! Form::textarea('comment', null, ['class' => 'form-control', 'readonly']) !!}
-      </div>
-      <div class="form-group text-center">
+      <div class="form-group text-center mt-5">
         {!! Form::submit('削除', ['class' => 'btn btn-primary']) !!}
       </div>
       @endif

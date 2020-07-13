@@ -39,7 +39,7 @@
           </table>
         </div>
         <div class="col-md-5 mt-4">
-          <p><img src="{{ asset('storage/' . $buy->products->photo) }}" alt="画像がありません" class="img-fluid"></p> 
+          <p><img src="{{ asset('storage/images/' . $buy->products->photo) }}" alt="画像がありません" class="img-fluid"></p> 
         </div>
       </div>
     </div>

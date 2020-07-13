@@ -2,37 +2,40 @@
 
 @section('content')
 <main>
-  <div class="py-4 vh-100">
-    <div class="container">
+  <div class="py-4">
+    <div class="container mb-4">
         <h1>My Contact</h1>
     </div>
-    <div class="container">
-      @if ($contacts->isNotEmpty())
-      <table class="table">
-        <thead>
-          <tr class="row">
-            <th class="col-2 text-center">date</th>
-            <th class="col-7 text-center">title</th>
-            <th class="col-2 text-center">comment</th>
-            <th class="col-1 text-center"></th>
-          </tr>
-          <tbody>
-            @foreach ($contacts as $contact)
-            <tr class="row">
-              {!! Form::open(['route' =>['sale.show.question', $contact->id], 'method' => 'GET']) !!}
-              <td class="col-2 text-center">{{ $contact->created_at->format('Y/m/d') }}</td>
-              <td class="col-7 text-center">{{ $contact->title }}</td>
-              <td class="col-2 text-center">{{ $contact->comment->count() }}</td>
-              <td class="col-1 text-center">{!! Form::submit('詳細', ['class' => 'btn btn-primary']) !!}</td>
-              {!! Form::close() !!}
-            </tr>
-            @endforeach
-          </tbody>
-        </thead>
-      </table>
+    @if ($contacts->isNotEmpty())
+    <div class="container min-vh-100">
+      @foreach ($contacts as $contact)
+      <div class="container border mb-3">
+        {!! Form::open(['route' =>['sale.show.question', $contact->id], 'method' => 'GET']) !!}
+          <table class="table table-striped mt-5">
+            <tbody>
+              <tr>
+                <th class="text-center">DATE</th>
+                <td class="text-center">{{ $contact->created_at->format('Y/m/d') }}</td>
+              </tr>
+              <tr>
+                <th class="text-center">TITLE</th>
+                <td class="text-center">{{ Str::limit($contact->title, 15) }}</td>
+              </tr>
+              <tr>
+                <th class="text-center">COMMENT</th>
+                <td class="text-center">{{ $contact->comment->count() }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="form-group text-center">
+            {!! Form::submit('詳細', ['class' => 'btn btn-primary']) !!}
+          </div>
+        {!! Form::close() !!} 
+      </div>
+      @endforeach
     </div>
     @else
-    <div class="container">
+    <div class="container vh-100">
       <div class="text-center mt-5">
         <h3>問い合わせはありません</h3>
       </div>

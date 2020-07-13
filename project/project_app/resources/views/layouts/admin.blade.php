@@ -13,15 +13,9 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 	
-	<header class="py-4">
-		<div class="container text-center">
-			<h1>Admin!!</h1>
-		</div>
-	</header>
-
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+	<nav class="navbar navbar-expand-md navbar-dark sticky-top bg-info">
 		<div class="container">
-			<a class="navbar-brand" href="">HO SOOCER JAPAN</a>
+			<a class="navbar-brand" href="">HO SOCCER JAPAN (ADMIN)</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
 			<div class="collapse navbar-collapse" id="navbar-content">
 				<!-- 左側メニュー：トップページの各コンテンツへのリンク -->
@@ -58,15 +52,12 @@
 
 	@yield('content')
 
-	<footer class="py-4 bg-dark text-light">
+	<footer class="py-4 bg-info text-light">
 		<div class="container text-center">
 			<!-- ナビゲーション -->
 			<ul class="nav justify-content-center mb-3">
 				<li class="nav-item">
 					<a class="nav-link" href="{{ route('sale.index') }}">Top</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ route('sale.show.contact') }}">Contact</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="{{ route('logout') }}">Logout</a>

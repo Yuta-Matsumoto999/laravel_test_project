@@ -77,7 +77,7 @@
               @foreach ($products as $product)
               <div class="mb-5 mt-3 col-md-4 col-sm-6 pr-2 pl-2 d-flex justify-content-around">
                 <div class="card " style="width:15rem;">
-                  <a href="{{ route('sale.show.product', $product->id) }}" class="card-link"><img class="card-img-top" src="{{ asset('storage/' . $product->photo) }}" alt="画像がありません"></a>
+                  <a href="{{ route('sale.show.product', $product->id) }}" class="card-link"><img class="card-img-top" src="{{ asset('storage/images/' . $product->photo) }}" alt="画像がありません"></a>
                   <div class="card-body">
                     <h5 class="card-title">{{ $product->name }}</h5>
                     <div class="mt-3 mb-3">

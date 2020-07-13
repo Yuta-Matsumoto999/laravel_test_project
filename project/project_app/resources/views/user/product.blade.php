@@ -12,7 +12,7 @@
           </div>
           @else
           <div class="text-center mb-5">
-            <img src="{{ asset('storage/' . $product->photo) }}" alt="商品画像がありません" class="img-fluid rounded text-center">
+            <img src="{{ asset('storage/images/' . $product->photo) }}" alt="商品画像がありません" class="img-fluid rounded text-center">
           </div>
           @endif
         </div>
@@ -64,7 +64,7 @@
         </div>
       </div>
       {!! Form::open(['route' => ['sale.store.cart', $product->id]]) !!}
-        <div class="form-row">
+        <div class="form-row d-flex justify-content-center">
           <div class="form-group col-3  @if($errors->has('quentity')) has-error @endif">
             <label for="quentity1">数量</label>
             {!! Form::text('quentity', null, ['class' => 'form-control form-control-sm', 'id' => 'jsNum', 'placeholder' => '1'])!!}

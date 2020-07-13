@@ -57,7 +57,7 @@
         </table>
       </div>
       <div class="col-md-5 mt-4">
-        <p><img src="{{ asset('storage/' . $product->photo) }}" alt="画像がありません" class="img-fluid"></p></div>
+        <p><img src="{{ asset('storage/images/' . $product->photo) }}" alt="画像がありません" class="img-fluid"></p></div>
     </div>
     <div class="text-right mb-5 mr-3">
         <a href="{{ route('admin.edit.product', $product->id) }}" class="btn btn-info mr-3">編集する</a>

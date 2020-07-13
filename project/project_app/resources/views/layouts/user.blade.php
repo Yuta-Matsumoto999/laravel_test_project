@@ -48,7 +48,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <a href="{{ route('sale.show.cart') }}" class="nav-link btn btn-info">Cart</a>
+          <a href="{{ route('sale.show.cart') }}" class="nav-link btn btn-info"><i class="fas fa-cart-plus"></i></a>
         </li>
       </ul>
       <!-- 右側メニュー：Logoutのリンク -->

@@ -44,7 +44,7 @@
             </table>
           </div>
           <div class="col-md-5 mt-4">
-            <a href="{{ route('sale.show.cart.product', $cart->id) }}"><img src="{{ asset('storage/' . $cart->products->photo) }}" alt="画像がありません" class="img-fluid"></a> 
+            <a href="{{ route('sale.show.cart.product', $cart->id) }}"><img src="{{ asset('storage/images/' . $cart->products->photo) }}" alt="画像がありません" class="img-fluid"></a> 
           </div>
         </div>
       </div>

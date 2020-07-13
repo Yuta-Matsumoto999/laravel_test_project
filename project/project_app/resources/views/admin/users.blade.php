@@ -10,15 +10,15 @@
     <div class="form-row">
       <div class="form-group col-4">
         <label>Name</label>
-        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('name', $searches['name'] ?? null, ['class' => 'form-control']) !!}
       </div>
       <div class="form-group col-4">
         <label>Email</label>
-        {!! Form::text('email', null, ['class' => 'form-control']) !!}
+        {!! Form::text('email', $searches['email'] ?? null, ['class' => 'form-control']) !!}
       </div>
       <div class="from-group col-4">
         <label>Birthday</label>
-        {!! Form::date('birthday', null, ['class' => 'form-control']) !!}
+        {!! Form::date('birthday', $searches['birthday'] ?? null, ['class' => 'form-control']) !!}
       </div>
     </div>
     <div class="form-group text-center">
@@ -26,6 +26,7 @@
     </div>
     {!! Form::close() !!}
   </div>
+  @if ($users->isNotEmpty())
   @foreach ($users as $user)
   <div class="container border mb-5">
     <h3 class="mt-3">{{ $user->name }}   様</h3>
@@ -65,5 +66,15 @@
   </div>
   @endforeach
   {{ $users->links() }}
+  @else
+  <div class="container vh-100">
+    <div class="text-center mt-5">
+      <h3>見つかりませんでした</h3>
+    </div>
+    <div class="text-center mt-3">
+      <img src="{{ asset('logo.image/ogp-1.png') }}" alt="" class="img-fluid">
+    </div>
+  </div>
+  @endif
 </div>
 @endsection

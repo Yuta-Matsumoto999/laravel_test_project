@@ -3,7 +3,7 @@
 @section('content')
 <main>
   <div class="py-4">
-    <div class="container vh-100">
+    <div class="container">
       <div class="row">
         <div class="col-8">
           <h1>My Cart</h1>
@@ -45,7 +45,7 @@
             </table>
           </div>
           <div class="col-md-5 mt-4">
-            <a href="{{ route('sale.show.cart.product', $cart->id) }}"><img src="{{ asset('storage/' . $cart->products->photo) }}" alt="画像がありません" class="img-fluid"></a> 
+            <a href="{{ route('sale.show.cart.product', $cart->id) }}"><img src="{{ asset('storage/images/' . $cart->products->photo) }}" alt="画像がありません" class="img-fluid"></a> 
           </div>
         </div>
         <div class="row">
@@ -64,13 +64,13 @@
         <a href="{{ route('sale.show.cart.purchase') }}"><button class="btn btn-primary">購入へ進む</button></a>
       </div>
       @else 
-      <div class="container mt-5">
-        <div class="text-center">
-          <h3>カートは空です</h3>
-        </div>
-        <div class="text-center mt-5">
-          <img src="{{ asset('logo.image/ogp-1.png') }}" alt="" class="img-fluid">
-        </div>
+    </div>
+    <div class="container mt-5 vh-100">
+      <div class="text-center">
+        <h3>カートは空です</h3>
+      </div>
+      <div class="text-center mt-5">
+        <img src="{{ asset('logo.image/ogp-1.png') }}" alt="" class="img-fluid">
       </div>
       <div class="col-12 text-center mt-5">
         <h5>小計 ({{ $sumQuentity }}個の商品) (税抜) : {{ $sumPrice}}円</h5>

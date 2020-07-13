@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
-<div class="py-4 vh-100">
+<div class="py-4">
   <div class="container mb-4">
     <h1>購入履歴</h1>
   </div>
@@ -41,13 +41,13 @@
         </table>
       </div>
       <div class="col-md-5 mt-4">
-        <p><img src="{{ asset('storage/' . $buy->products->photo) }}" alt="画像がありません" class="img-fluid"></p> 
+        <p><img src="{{ asset('storage/images/' . $buy->products->photo) }}" alt="画像がありません" class="img-fluid"></p> 
       </div>
     </div>
   </div>
   @endforeach
   @else 
-    <div class="container">
+    <div class="container vh-100">
       <div class="text-center mt-5">
         <h3>購入履歴はありません</h3>
       </div>

@@ -69,7 +69,7 @@
         </table>
       </div>
       <div class="col-md-5 mt-4">
-        <p><img src="{{ asset('storage/' . $buy->products->photo) }}" alt="画像がありません" class="img-fluid"></p> 
+        <p><img src="{{ asset('storage/images/' . $buy->products->photo) }}" alt="画像がありません" class="img-fluid"></p> 
       </div>
     </div>
       <div class="form-group text-center">
@@ -83,7 +83,7 @@
   </div>
   @endforeach
   @else 
-    <div class="container">
+    <div class="container vh-100">
       <div class="text-center mt-5">
         <h3>注文履歴はありません</h3>
       </div>
